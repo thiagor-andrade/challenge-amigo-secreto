@@ -8,17 +8,18 @@
 
 let nomes_amigos = []; // Arrey nomes dos amigos
 
-function adicionarAmigo() {
-    const input = document.getElementById('amigo'); // Pega o nome digitado no campo de texto
-    const nome = input.value.trim(); // Remove espaços extras do começo e do fim
-
-    if (nome === '') {
-        alert('Por favor, digite um nome válido!'); // Se o campo estiver vazio, avisa o usuário
-        return; // Sai da função
+function adicionarAmigo() {    
+    const nomeAmigo = document.getElementById('amigo').value;// Obtém o valor do nome digitado no campo de texto
+    
+        if (nomeAmigo.trim() !== '') { // Verifica se o campo não está vazio
+        // Adiciona o nome à lista (exemplo)
+        const listaAmigos = document.getElementById('listaAmigos'); // Adiciona o nome à lista
+        const li = document.createElement('li');
+        li.textContent = nomeAmigo;
+        listaAmigos.appendChild(li);
+       
+        document.getElementById('amigo').value = '';   // Limpa o campo de entrada
+    } else {
+        alert('Por favor, digite um nome!');
     }
-
-    nomes_amigos.push(nome); // Adiciona o nome na lista
-    mostrarLista(); // Atualiza a lista na tela
-    input.value = ''; // Limpa o campo de texto para o próximo nome
 }
-
