@@ -7,6 +7,7 @@
 //Sorteio aleatório: Ao clicar no botão "Sortear Amigo", um nome da lista será selecionado aleatoriamente e exibido na página.
 
 let nomesAmigos = []; // Array para guardar os nomes dos amigos
+let nomesSorteados = []; // Array para guardar os nomes que já foram sorteados
 
 function adicionarAmigo() {    
     const salvarNomeAmigo = document.getElementById('amigo').value; // Obtém o valor do nome digitado no campo de texto
@@ -30,13 +31,20 @@ function sortearAmigo() {
         alert('Adicione pelo menos um nome antes de sortear!');
         return;
     }
+let indiceAleatorio;
+let amigoSorteado;
 
-    const indiceAleatorio = Math.floor(Math.random() * nomesAmigos.length); // Gera um índice aleatório
-    const amigoSorteado = nomesAmigos[indiceAleatorio]; // Seleciona o amigo aleatoriamente
-    const resultado = document.getElementById('resultado'); // Obtém a lista de resultados
-    resultado.innerHTML = ''; // Limpa resultados anteriores
+//garante que o nome não seja repetido
+do{
+    indiceAleatorio = Math.floor(Math.random() * nomesAmigos.length); //gera um indice aleatótio 
+    amigoSorteado = nomesAmigos[indiceAleatorio]; //Seleciona o amigo aleatoriamente
+} while (nomesSorteados.includes(amigoSorteado)); //repete até encontrar um nome não sorteado 
 
-    const li = document.createElement('li'); // Cria um novo elemento de lista para o resultado
-    li.textContent = `Você tirou: ${amigoSorteado}`; // Define o texto do resultado
-    resultado.appendChild(li); // Adiciona o resultado à lista
+nomesSorteados.push(amigoSorteado); //adiciona o nome sorteado a lista de nomes já sorteados
+const resultado = document.getElementById('resultado'); // Obtém a lista de resultados
+resultado.innerHTML = ''; // Limpa resultados anteriores
+
+const li = document.createElement('li'); // Cria um novo elemento de lista para o resultado
+li.textContent = `Você tirou: ${amigoSorteado}`; // Define o texto do resultado
+ resultado.appendChild(li); // Adiciona o resultado à lista
 }
