@@ -13,6 +13,15 @@ function adicionarAmigo() {
     const salvarNomeAmigo = document.getElementById('amigo').value; // Obtém o valor do nome digitado no campo de texto
     
     if (salvarNomeAmigo.trim() !== '') { // Verifica se o campo não está vazio
+        //reiniciar a lista apos todos os nomes sorteados 
+        if (nomesSorteados.length === nomesAmigos.length) {
+            nomesAmigos = []; // limpa o array de amigos
+            const resultado = document.getElementById ('resultado');
+            resultado.innerHTML = ''; //limpa o resultado
+            document.getElementById('listaAmigos').innerHTML = ''; //limpa lista de amigos 
+            document.querySelector('.section-title').textContent ="Digite o nome dos seus amigos"; // restaura o texto 
+        }
+        
         nomesAmigos.push(salvarNomeAmigo); // Adiciona o nome ao array
 
         const listaAmigos = document.getElementById('listaAmigos'); // Obtém a lista de amigos no HTML
@@ -47,4 +56,13 @@ resultado.innerHTML = ''; // Limpa resultados anteriores
 const li = document.createElement('li'); // Cria um novo elemento de lista para o resultado
 li.textContent = `Você tirou: ${amigoSorteado}`; // Define o texto do resultado
  resultado.appendChild(li); // Adiciona o resultado à lista
+
+  // Verifica se todos os nomes foram sorteados
+  if (nomesSorteados.length === nomesAmigos.length) {
+    const mensagemFinal = document.createElement('h2'); // Cria um novo elemento de cabeçalho para a mensagem
+    mensagemFinal.textContent = "Todos os nomes da lista foram SORTEADOS!";
+    document.querySelector('.input-section').insertBefore(mensagemFinal, document.querySelector('.input-wrapper')); // Insere a mensagem acima do campo de entrada
+    document.querySelector('.section-title').textContent = ''; // Limpa o texto da seção
 }
+}
+
